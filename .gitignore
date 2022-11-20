@@ -1,0 +1,7 @@
+# Emacs
+.emacs.d/eln-cache/
+.emacs.d/auto-save-list/
+.emacs.d/elpa/
+.emacs.d/var/
+.emacs.d/transient/
+.emacs.d/projectile-bookmarks.eld
