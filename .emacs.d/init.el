@@ -34,7 +34,7 @@
 ;; mac end
 
 ;; emacs custom files locations
-;;(setq backup-directory-alist `(("." . "~/.saves")))
+(setq backup-directory-alist `(("." . "~/.saves")))
 ;;(setq custom-file "~/emacs/custom-file.el")
 ;; emacs custom files end
 
@@ -132,7 +132,10 @@
         :config
         (autoload 'utop-minor-mode "utop" "Minor mode for utop" t)
         (add-hook 'tuareg-mode-hook 'utop-minor-mode)
-        ))
+        )
+      (use-package dune
+	:ensure t)
+      )
 
       ;;display type auto
       (use-package merlin-eldoc
@@ -228,16 +231,12 @@
 (use-package bazel
   :ensure t
   )
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(package-selected-packages
-   '(bazel nginx-mode emmet-mode web-beautify web-mode selectrum-prescient selectrum projectile company-coq proof-general merlin-eldoc utop flycheck-ocaml merlin tuareg json-mode smartparens magit company flycheck use-package)))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
+
+(use-package treemacs
+  :ensure t
+  :bind
+  (:map global-map
+	([f8] . treemacs)
+	("C-<f8>" . treemacs-select-window))
+  :config
+  (setq treemacs-is-never-other-window t))
