@@ -62,6 +62,9 @@
 (load-theme 'misterioso)
 ;; theme end
 
+; Set cursor color 
+(set-cursor-color "#fd6a02")
+
 ;; autocomplete company
 (use-package company
     :ensure t
@@ -240,3 +243,50 @@
 	("C-<f8>" . treemacs-select-window))
   :config
   (setq treemacs-is-never-other-window t))
+
+
+(use-package lsp-mode
+  :ensure t)
+
+(use-package lsp-ui
+  :ensure t)
+
+(use-package company
+  :ensure t
+  :init
+  (setq company-idle-delay 0)
+  (setq company-minimum-prefix-length 1))
+
+(use-package yasnippet
+  :ensure t)
+
+(use-package protobuf-mode
+  :ensure t)
+
+;; golang
+;; Set up before-save hooks to format buffer and add/delete imports.
+(use-package go-mode
+  :ensure t)
+
+(defun lsp-go-install-save-hooks ()
+  (add-hook 'before-save-hook #'lsp-format-buffer t t)
+  (add-hook 'before-save-hook #'lsp-organize-imports t t))
+(add-hook 'go-mode-hook #'lsp-go-install-save-hooks)
+
+;; Start LSP Mode and YASnippet mode
+(add-hook 'go-mode-hook #'lsp-deferred)
+(add-hook 'go-mode-hook #'yas-minor-mode)
+
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages
+   '(protobuf-mode go-mode company-mod company-mode lsp-ui lsp-mode web-mode web-beautify utop use-package treemacs smartparens selectrum-prescient proof-general projectile nginx-mode merlin-eldoc magit json-mode flycheck-ocaml emmet-mode dune company-coq bazel)))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )

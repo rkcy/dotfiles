@@ -28,3 +28,6 @@ fi
 
 # opam configuration
 test -r /home/rakesh/.opam/opam-init/init.sh && . /home/rakesh/.opam/opam-init/init.sh > /dev/null 2> /dev/null || true
+export PATH=$PATH:/usr/local/go/bin
+export GOPATH="$(go env GOPATH)"
+export PATH="${PATH}:${GOPATH}/bin"
